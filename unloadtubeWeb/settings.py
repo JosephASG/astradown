@@ -125,7 +125,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'unloader/static/'
 
 if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
@@ -135,9 +135,9 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'unloader/static'),)
-# STATICFILES_DIRS = [
-#     BASE_DIR / "unloader/static",
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / "unloader/static",
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
