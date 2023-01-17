@@ -1,0 +1,149 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<section>
+
+    <div class="ctn-download-section">
+        <div class="ctn-btn-bhome-mobile">
+            <a href="/">Descargar más videos</a>
+        </div>
+        <div class="ctn-info-video">
+            <div class="ctn-thumbnail">
+                <img src="{{url.thumbnail_url}}" alt="{{url.title}}">
+            </div>
+            <div class="ctn-title-video">
+                <div class="ctn-item-desc">
+                    <input type="hidden" class="v_length" id="v_length" value="{{url.length}}">
+                    <span id="v_length_span"></span>
+                </div>
+                <div class="ctn-item-desc">
+                    <span id="v_title_span">{{url.title}}</span>
+                </div>
+                <div class="ctn-item-desc">
+                    <a href="{{c_url}}" target="_blank">Descargar más videos del canal</a>
+                    <span class="c_name">{{c_name.channel_name}}</span>
+                </div>
+            </div>
+            <div class="video-info">
+                <div class="ctn_views">
+                    <input type="hidden" class="views" id="views" value="{{url.views}}">
+                    <p id="number_p" class="number"></p>
+                    <p> <i class="fa-solid fa-eye"></i></p>
+                </div>
+                <div class="ctn_date">
+                    <input type="hidden" class="publish_date" id="publish_date" value="{{url.publish_date}}">
+                    <p translate="yes" id="publish_date_p"></p>
+                </div>
+            </div>
+            <div class="loader-download">
+                <div class="container-download">
+                    <div class="wrapper-loader-download">
+                        <div class="ctn-titles-loader-download">
+                            <div class="ctn-converting-download">
+                                <p>Tu video se está descargando...</p>
+                            </div>
+                            <div class="ctn-pacient-download">
+                                <p>Ten paciencia no cierres Astradown, estará listo en unos segundos 😊</p>
+                            </div>
+                            <div class="ctn-xmark">
+                                <button type="button" class="xmark" aria-label="Cerrar" title="Cerrar">
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="loader-watch-download"></div>
+                        <div class="ctn-reloj">
+                            <div id="contenedor">
+                                <div class="reloj" id="Horas">00</div>
+                                <div class="reloj" id="Minutos">:00</div>
+                                <div class="reloj" id="Segundos">00</div>
+                                <div class="reloj" id="Centesimas">:00</div>
+                            </div>
+                            <!-- <div class="ctn-verses">
+                                <p id="verse"></p>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--{# <form action="{% url 'unloadTube:unload_success' i.resolution %}" method="post"> #} -->
+        <div class="ctn-main-quiality-content">
+            <div class="ctn-quiality-content">
+                <div class="ctn-title-guide">
+                    <p>Elije la calidad o formato de tu preferencia.</p>
+                    <!-- <img src="{% static 'img/emoji-3.png' %}" alt=""> -->
+                    <img src="{% static 'img/mano.png' %}" alt="Astradown - Mano apuntando hacia abajo">
+                </div>
+                <div class="table">
+                    <div class="table-head">
+                        <div class="table-row-column">
+                            <!-- <th scope="col">Tamaño</th> -->
+                            <span scope="row">Calidad</span>
+                            <!-- <th scope="col">Tipo</th> -->
+                            <span scope="row">Descargar</span>
+                        </div>
+                    </div>
+
+                    <form action="download" method="post" id="form-unload">
+                        {% csrf_token %}
+                        <div class="table-body">
+                            <div class="table-body-rc">
+                                <!-- {% for i in streams %}
+                                                <th style="color: var(--font-color) !important;" scope="row">{{i.filesize_mb}} MB</th>
+                                                <td style="color: var(--font-color) !important;">{{i.type}}</td>
+                                                {% endfor %} -->
+                                <div style="color: var(--font-color) !important;" class="table-data">
+                                    <!-- <select name="itag" id="itag" autofocus>
+                                                        {% for i in streams %}
+                                                        <option value="{{i.itag}}" class="ctn-options">
+                                                            {{i.resolution}} - {{i.filesize_mb}} MB
+                                                        </option>
+                                                        {% endfor %}
+                                                        <option value="audio">mp3</option>
+                                                    </select> -->
+                                    <label class="custom-select" for="styledSelect1">
+                                        <select id="styledSelect1" name="itag">
+                                            {% for i in streams %}
+                                            <option value="{{i.itag}}">
+                                                {{i.resolution}} 🡆 {{i.filesize_mb}} MB
+                                            </option>
+                                            {% endfor %}
+                                            <option value="audio">Audio 🡆 MP3</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="table-data">
+                                    <button class="button" type="submit" value="Download" id="download"
+                                        onclick="inicio();" aria-label="Descargar {{url.title}}"
+                                        title="Descargar {{url.title}}">
+                                        <div class="icon">
+                                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" height="16"
+                                                width="16" role="img" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"
+                                                    stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
+                                                    stroke="currentColor" fill="none">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <p>Descargar</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="ctn-btn-bhome-desktop">
+                <a href="/">Descargar más videos</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

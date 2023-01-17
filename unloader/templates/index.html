@@ -1,0 +1,445 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="icon" href="{% static 'img/astradown-descargar-videos-de-YouTube-gratis.png' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astradown | Descarga Videos de YouTube Gratis</title>
+    <meta name="title" content="Descargar videos de YouTube gratis en Astradown">
+    <meta name="description"
+        content="Astradown es una herramienta gratuita para descargar videos de YouTube en el formato que desees. Descarga tus videos favoritos ahora mismo.">
+    <meta name="keywords"
+        content="descargar videos de youtube, descargar videos, youtube, videos, alta velocidad, calidad">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://astradown.com">
+    <meta name="author" content="Joseph Santamaria - JoSePh-SaN">
+    <meta name="audience" content="all">
+    <meta itemprop="name" content="Descargar videos de YouTube gratis en Astradown">
+    <meta itemprop="description"
+        content="Astradown es una herramienta gratuita para descargar videos de YouTube en el formato que desees. Descarga tus videos favoritos ahora mismo.">
+    <!-- <meta itemprop="image" content="http://.com/img/A-Little-Christian-Boy-logo-white.png"> -->
+    <!-- <meta property="og:image" content="http://.com/img/A-Little-Christian-Boy-logo-white.png"> -->
+    <meta property="og:description"
+        content="Astradown es una herramienta gratuita para descargar videos de YouTube en el formato que desees. Descarga tus videos favoritos ahora mismo.">
+    <meta property="og:site_name" content="Descargar videos de YouTube gratis en Astradown">
+    <!-- <meta name="google-site-verification" content=""> -->
+    <!-- <meta property="og:url" content="http://.com/"> -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Descargar videos de YouTube gratis en Astradown">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- <link rel="stylesheet" href="{% static 'css/i.css' %}"> -->
+    <script src="https://kit.fontawesome.com/ec6d4e6de2.js" crossorigin="anonymous"></script>
+    <style>
+        #error {
+            position: absolute;
+            top: 10%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ctn-error {
+            width: auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #E46456;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: var(--font-color);
+        }
+
+        .ctn-error>svg {
+            margin: 0 20px;
+            width: 48px;
+            height: 48px;
+            fill: var(--font-color);
+        }
+
+        #btn-close {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--font-color);
+            margin: 0 20px;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        #btn-close svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--color-secondary);
+        }
+
+        @media (max-width: 991px) {
+            #error {
+                top: 15%;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <svg width="411" height="379" viewBox="0 0 411 379" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M274.88 13H137.017C114.792 13 94.3876 25.2854 83.9892 44.9279L20.2595 165.312C10.744 183.287 10.9818 204.859 20.8914 222.619L83.7256 335.235C94.3235 354.229 114.371 366 136.122 366H275.772C297.627 366 317.753 354.117 328.309 334.98L390.426 222.371C400.151 204.741 400.385 183.408 391.048 165.569L328.039 45.178C317.686 25.3968 297.206 13 274.88 13Z"
+                        stroke="var(--font-color)" stroke-width="25" />
+                    <path
+                        d="M197.912 182.586C196.923 183.125 195.574 184.204 195.035 184.924C193.506 186.812 193.596 194.994 195.125 197.062C195.754 197.872 199.081 200.12 202.408 202.008C211.309 206.863 212.209 208.482 212.568 219.811C212.838 226.375 212.568 229.162 211.849 229.162C210.41 229.162 205.195 226.375 204.476 225.206C204.116 224.667 203.756 220.351 203.756 215.585C203.756 208.482 203.487 206.683 202.228 205.604C200.609 204.166 195.304 201.288 194.315 201.288C194.046 201.288 193.956 208.032 194.046 216.304L194.315 231.32L201.868 235.726C212.658 241.93 213.288 241.93 218.323 236.536C220.661 234.018 222.819 230.961 223.178 229.702C223.448 228.443 223.628 222.599 223.448 216.664C223.088 206.414 222.998 205.784 220.391 202.008C218.772 199.67 214.816 196.253 210.59 193.466C200.789 186.992 200.519 186.722 202.408 183.845C203.936 181.507 203.936 181.507 201.868 181.507C200.699 181.507 198.901 182.046 197.912 182.586Z"
+                        fill="#FFAA47" />
+                    <path
+                        d="M203.127 52.6574C202.228 52.9272 201.958 58.2322 201.958 74.4171V95.8171L204.206 97.8852C206.094 99.5936 206.813 99.8633 208.072 99.0541C209.421 98.2448 209.601 95.9969 209.511 77.4742C209.421 58.5919 209.331 56.6137 207.713 54.4557C206.004 52.1179 205.195 51.7583 203.127 52.6574Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M190.898 86.3759C190.539 93.839 190.269 102.651 190.269 105.888V111.822L192.067 109.574C195.574 105.168 196.833 98.5146 196.473 86.286C196.203 77.5642 195.754 74.6869 194.765 73.8776C191.798 71.4499 191.438 72.6188 190.898 86.3759Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M216.974 73.7876C215.715 74.7767 215.446 77.0246 215.266 88.4439C214.996 101.482 215.086 102.111 217.424 107.057C218.772 109.934 220.031 112.272 220.301 112.272C220.661 112.272 220.841 103.37 220.841 92.4902C220.841 71.7196 220.661 71.0902 216.974 73.7876Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M228.933 97.4355C228.034 98.5145 227.944 108.765 228.213 143.922L228.573 189.15L230.731 193.196L232.799 197.242L233.518 194.725C234.328 191.578 236.126 138.078 236.126 115.778C236.126 100.403 236.036 99.9532 234.058 98.0649C231.63 95.7271 230.461 95.6372 228.933 97.4355Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M176.512 97.6154C175.523 98.5146 175.793 195.894 176.692 195.894C177.141 195.894 178.67 194.545 180.109 192.926L182.806 189.869L183.345 166.131C183.705 153.094 183.975 132.143 183.975 119.645V96.986H180.558C178.67 96.986 176.782 97.2557 176.512 97.6154Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M241.071 163.434L241.701 202.637L244.039 206.863C245.387 209.291 246.736 211.179 247.186 211.179C247.545 211.179 247.725 191.847 247.635 168.289L247.365 125.31L243.859 124.77L240.352 124.231L241.071 163.434Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M164.373 125.579C162.845 126.658 163.204 209.471 164.823 210.01C165.452 210.28 166.801 208.662 167.97 206.504C170.038 202.637 170.038 202.547 170.038 164.603C170.038 131.783 169.858 126.478 168.689 125.759C167.071 124.68 165.902 124.68 164.373 125.579Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M149.537 174.943C149.177 175.213 148.908 194.904 148.908 218.552V261.532L151.515 264.41C153.763 266.927 154.303 267.107 155.561 266.118C156.82 265.039 157 260.273 157 221.07C157 196.883 156.73 176.562 156.461 175.752C155.921 174.314 150.706 173.684 149.537 174.943Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M256.537 176.382C255.368 178.27 255.098 184.564 254.918 220.98C254.649 268.276 254.469 266.837 260.403 265.578L263.37 264.949L262.741 221.25C262.202 182.766 261.932 177.371 260.673 175.932C258.785 173.864 258.155 173.864 256.537 176.382Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M138.297 198.861C136.499 200.749 136.409 202.098 135.78 222.958L135.15 245.167L137.218 246.246C139.107 247.236 139.556 247.146 141.265 244.988C142.973 242.92 143.333 240.851 143.782 232.489C144.142 226.915 144.412 217.114 144.412 210.55C144.412 199.67 144.232 198.591 142.703 197.692C140.366 196.523 140.545 196.433 138.297 198.861Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M269.125 198.321C268.765 198.591 268.496 209.471 268.496 222.509C268.496 244.089 268.586 246.067 270.024 246.696C271.193 247.056 272.272 246.516 273.621 244.718C275.599 242.29 275.689 241.661 275.689 221.34C275.689 209.92 275.419 199.94 275.149 199.131C274.61 197.692 270.294 197.152 269.125 198.321Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M230.371 235.636C230.102 236.266 229.742 249.483 229.472 264.859L228.933 293.003H231.99C233.968 293.003 235.227 292.463 235.586 291.564C235.856 290.755 236.126 279.695 236.126 267.017C236.126 245.347 236.036 243.459 234.238 239.143C232.349 234.647 231.001 233.478 230.371 235.636Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M177.591 238.783C175.523 242.02 175.523 242.83 175.163 267.467C174.803 290.575 174.893 292.823 176.332 293.273C178.13 293.992 180.918 292.643 182.087 290.485C182.536 289.586 183.076 276.998 183.166 262.431C183.435 236.176 183.435 235.906 181.547 235.636C180.198 235.457 179.119 236.266 177.591 238.783Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M165.362 251.372C162.935 254.519 162.845 255.148 162.575 266.208L162.215 277.717H165.362H168.42L168.959 268.905C169.858 256.407 169.678 248.045 168.779 248.045C168.24 248.045 166.711 249.573 165.362 251.372Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M241.701 262.611C241.971 278.526 242.061 278.706 247.366 277.357C249.434 276.818 249.434 276.638 249.254 266.208C249.164 256.227 248.984 255.328 246.646 251.821C245.298 249.753 243.589 248.045 242.87 248.045C241.701 248.045 241.521 250.113 241.701 262.611Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M217.783 254.159L215.445 256.677V286.529C215.445 313.054 215.625 316.471 216.884 317.01C217.693 317.28 219.132 316.651 220.391 315.392C222.459 313.234 222.459 312.964 223.088 283.382C223.718 254.429 223.628 253.53 221.919 252.63C220.571 251.911 219.761 252.181 217.783 254.159Z"
+                        fill="var(--font-color)" />
+                    <path
+                        d="M190.718 254.339C189.19 256.047 189.01 258.385 188.65 283.292C188.291 308.109 188.381 310.626 189.819 313.414C191.797 317.01 192.337 317.1 194.675 313.953C196.563 311.705 196.563 310.806 196.383 282.303C196.113 253.53 196.113 252.99 194.225 252.72C193.236 252.541 191.618 253.26 190.718 254.339Z"
+                        fill="var(--font-color)" />
+                </svg>
+
+                <h1>astradown</h1>
+                <p>beta</p>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <label id="switch" class="switch" for="slider" title="Cambiar tema - Oscuro/Claro">
+                        <input type="checkbox" onchange="toggleTheme()" id="slider"
+                            aria-labelledby="Cambiar tema - Oscuro/Claro" title="Cambiar tema - Oscuro/Claro">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+                <li class="item">
+                    <a href="/soon" title="Descarga desde diferentes plataformas">
+                        <i class="fa-brands fa-facebook-f"></i> Facebook downloader
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="/thank-you" title="Realizar una donación con PayPal">
+                        <i class="fa-regular fa-heart"></i> Donar
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#acerca-de" class="page-scroll" title="Más acerca de Astradown">
+                        <i class="fa-solid fa-circle-info"></i> Acerca de
+                    </a>
+                </li>
+                <li class="item-nav">
+                    <button type="button" class="btn-responsive-menu-open" aria-label="Open menu" title="Open menu">
+                        <span></span>
+                        <span></span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="ctn-responsive-menu">
+        <div class="ctn-responsive-btn-close">
+            <button type="button" class="btn-responsive-menu-close" aria-label="Close menu" title="Close menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="ctn-content-responsive-menu">
+            <ul>
+                <li>
+                    <a href="/">
+                        <i class="fa-solid fa-house"></i> Inicio
+                    </a>
+                </li>
+                <li>
+                    <a href="/soon">
+                        <i class="fa-brands fa-facebook-f"></i> Facebook downloader
+                    </a>
+                </li>
+                <li>
+                    <a href="/thank-you">
+                        <i class="fa-regular fa-heart"></i> Donar
+                    </a>
+                </li>
+                <li>
+                    <a href="#acerca-de" class="page-scroll scrolly">
+                        <i class="fa-solid fa-circle-info"></i> Acerca de
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <div class="footer">
+            <div class="footer-logo">
+                <img src="{% static 'img/astradown-descargar-videos-de-YouTube-gratis.png' %}"
+                    alt="Astradown Descargar videos de YouYube gratis">
+            </div>
+            <div class="ctn-by">
+                <span>Made with love by <a href="https://joseph-san.com/" target="_blank">JoSePh-SaN</a></span>
+            </div>
+            <div class="ctn-arr">
+                <span>© 2023 Astradown. All Rights Reserved. </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/smooth-scroll.js' %}"></script>
+    <script src="{% static 'js/Theme.js' %}"></script>
+    <script src="{% static 'js/Alert.js' %}"></script>
+    <script src="{% static 'js/Main.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+    <script>
+        const btn_menu_open = document.querySelector('.btn-responsive-menu-open')
+        const btn_menu_close = document.querySelector('.btn-responsive-menu-close')
+        const menu = document.querySelector('.ctn-responsive-menu')
+        const menu_items = document.querySelectorAll('.ctn-content-responsive-menu ul li a')
+        const trash_can = document.querySelector('.fa-trash-can')
+        const input_hero = document.querySelector('#link')
+        const btn_hero = document.querySelector('#btn-hero')
+        const loader_hero = document.querySelector('.loader-hero')
+
+
+        btn_menu_open.addEventListener('click', () => {
+            menu.classList.add('active')
+        })
+        btn_menu_close.addEventListener('click', () => {
+            menu.classList.remove('active')
+        })
+        menu_items.forEach((item) => {
+            item.addEventListener('click', () => {
+                menu.classList.remove('active')
+            })
+        });
+        trash_can.addEventListener('click', () => {
+            input_hero.value = "";
+        })
+
+        btn_hero.addEventListener('click', () => {
+            if (input_hero.value === "")
+                return 0
+            else
+                loader_hero.classList.add('active')
+        })
+
+    </script>
+    <script>
+        PayPal.Donation.Button({
+            env: 'sandbox',
+            business: '6BEVFT8SFUCN4',
+            image: {
+                src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif',
+                title: 'PayPal - The safer, easier way to pay online!',
+                alt: 'Donate with PayPal button'
+            },
+            onComplete: function (params) {
+                // Your onComplete handler
+            },
+        }).render('#paypal-donate-button-container');
+    </script>
+    <script>
+
+        function main() {
+
+            (function () {
+                'use strict';
+
+                $('a.page-scroll').click(function () {
+                    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                        if (target.length) {
+                            $('html,body').animate({
+                                scrollTop: target.offset().top
+                            }, 50);
+                            return false;
+                        }
+                    }
+                });
+
+            }());
+
+
+        }
+        main();
+
+    </script>
+    <script>
+        let views = document.getElementById('views').value;
+        const formato = new Intl.NumberFormat('de-DE');
+        var new_view = formato.format(views);
+        views = new_view;
+        document.getElementById("number_p").innerHTML = views;
+
+        const str = document.getElementById('publish_date').value;
+        const newStr = str.slice(0, -10)
+        document.getElementById("publish_date_p").innerHTML = newStr;
+
+        let v_length = document.getElementById('v_length').value;
+
+        function secondsToString(seconds) {
+            var hour = Math.floor(seconds / 3600);
+            hour = (hour < 10) ? '0' + hour : hour;
+            var minute = Math.floor((seconds / 60) % 60);
+            minute = (minute < 10) ? '0' + minute : minute;
+            var second = seconds % 60;
+            second = (second < 10) ? '0' + second : second;
+            return hour + ':' + minute + ':' + second;
+        }
+        let new_length = secondsToString(v_length);
+        document.getElementById("v_length_span").innerHTML = new_length;
+
+    </script>
+    <script>
+        const scroll = document.querySelector('.star-download');
+        scroll.addEventListener('click', () => {
+            scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+        })
+    </script>
+    <script>
+        var centesimas = 0;
+        var segundos = 0;
+        var minutos = 0;
+        var horas = 0;
+        let Segundos = document.getElementById("Segundos");
+        let Centesimas = document.getElementById("Centesimas");
+        let verse = document.getElementById('verse');
+
+        let words = [
+            "Pues yo sé los planes que tengo para ustedes —dice el Señor—. Son planes para lo bueno y no para lo malo, para darles un futuro y una esperanza. | Jeremías 29:11",
+            "Él les secará toda lágrima de los ojos, y no habrá más muerte ni tristeza ni llanto ni dolor. Todas esas cosas ya no existirán más». | Apocalipsis 21:4",
+            "Busquen el reino de Dios por encima de todo lo demás y lleven una vida justa, y él les dará todo lo que necesiten. | Mateo 6:33",
+            "Y todo lo que hagáis, hacedlo de corazón, como para el Señor y no para los hombres; | Colosenses 3:23",
+            "Porque todo aquel que pide, recibe; y el que busca, halla; y al que llama, se le abrirá. | Mateo 7:8",
+            // "»¡Amen a sus enemigos! Háganles bien. Presten sin esperar nada a cambio. Entonces su recompensa del cielo será grande, y se estarán comportando verdaderamente como hijos del Altísimo, pues él es bondadoso con los que son desagradecidos y perversos. Lucas 6:35",
+            "Pues el Señor es bueno. Su amor inagotable permanece para siempre, y su fidelidad continúa de generación en generación. | Salmos 100:5",
+            // "Y he sido un ejemplo constante de cómo pueden ayudar con trabajo y esfuerzo a los que están en necesidad. Deben recordar las palabras del Señor Jesús: “Hay más bendición en dar que en recibir”». Hechos de los Apóstoles 20:35",
+            "El nombre del Señor es una fortaleza firme; los justos corren a él y quedan a salvo. | Proverbios 18:10",
+            "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios. | Juan 1:1",
+            "Tu palabra es una lámpara que guía mis pies y una luz para mi camino. | Salmos 119:105",
+            // "Tales cosas se escribieron hace tiempo en las Escrituras para que nos sirvan de enseñanza. Y las Escrituras nos dan esperanza y ánimo mientras esperamos con paciencia hasta que se cumplan las promesas de Dios. Romanos 15:4",
+            "Toda la Escritura es inspirada por Dios, y útil para enseñar, para redargüir, para corregir, para instruir en justicia. | 2 Timoteo 3:16",
+            "y me buscaréis y me hallaréis, porque me buscaréis de todo vuestro corazón. | Jeremías 29:13",
+            "Sean siempre humildes y amables. Sean pacientes unos con otros y tolérense las faltas por amor. | Efesios 4:2",
+            "Puedes hacer todos los planes que quieras, pero el propósito del Señor prevalecerá. | Proverbios 19:21",
+            "En cambio, vístanse con la belleza interior, la que no se desvanece, la belleza de un espíritu tierno y sereno, que es tan precioso a los ojos de Dios. | 1 Pedro 3:4",
+            // "Los que obedecen los mandamientos de Dios permanecen en comunión con él, y él permanece en comunión con ellos. Y sabemos que él vive en nosotros, porque el Espíritu que nos dio vive en nosotros. 1 Juan 3:24",
+            "Y estamos seguros de que él nos oye cada vez que le pedimos algo que le agrada; | 1 Juan 5:14",
+            "y como sabemos que él nos oye cuando le hacemos nuestras peticiones, también sabemos que nos dará lo que le pedimos. | 1 Juan 5:15",
+            "»¡Mira! Yo estoy a la puerta y llamo. Si oyes mi voz y abres la puerta, yo entraré y cenaremos juntos como amigos. | Apocalipsis 3:20",
+            // "pero él me ha dicho: «Con mi gracia tienes más que suficiente, porque mi poder se perfecciona en la debilidad.» Por eso, con mucho gusto habré de jactarme en mis debilidades, para que el poder de Cristo repose en mí. 2 Corintios 12:9 RVC",
+            "Aunque un ejército poderoso me rodee, mi corazón no temerá. Aunque me ataquen, permaneceré confiado. | Salmos 27:3"
+        ]
+
+        function random_paragraph() {
+            let n = 0;
+            n = Math.floor((Math.random() * words.length));
+            verse.innerHTML = words[n]
+            setInterval(function () {
+                n = Math.floor((Math.random() * words.length));
+                verse.innerHTML = words[n]
+            }, 5000);
+        }
+        random_paragraph();
+
+        function inicio() {
+            control = setInterval(cronometro, 10);
+        }
+        function cronometro() {
+            if (centesimas < 99) {
+                centesimas++;
+                if (centesimas < 10) { centesimas = "0" + centesimas }
+                Centesimas.innerHTML = ":" + centesimas;
+            }
+            if (centesimas == 99) {
+                centesimas = -1;
+            }
+            if (centesimas == 0) {
+                segundos++;
+                if (segundos < 10) { segundos = "0" + segundos }
+                Segundos.innerHTML = ":" + segundos;
+            }
+            if (segundos == 59) {
+                segundos = -1;
+            }
+            if ((centesimas == 0) && (segundos == 0)) {
+                minutos++;
+                if (minutos < 10) { minutos = "0" + minutos }
+                Minutos.innerHTML = ":" + minutos;
+            }
+            if (minutos == 59) {
+                minutos = -1;
+            }
+            if ((centesimas == 0) && (segundos == 0) && (minutos == 0)) {
+                horas++;
+                if (horas < 10) { horas = "0" + horas }
+                Horas.innerHTML = horas;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

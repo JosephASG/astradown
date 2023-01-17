@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Allow: /thank-you
+
+Sitemap: https://astradown.com/sitemap.xml

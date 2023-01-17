@@ -1,0 +1,239 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<main>
+
+    <section>
+        <div class="main-section">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="{{ message.tags }}" id="error">
+                <div class="ctn-error">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                        <path
+                            d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+                    </svg>
+                    {{ message }}
+                    <button type="button" id="btn-close" aria-label="Cerrar" title="Cerrar">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                            <path
+                                d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="ctn-hero">
+                <h1>Astradown | Descarga tus videos favoritos</h1>
+                <div class="ctn-hero-desc">
+                    <p>Descarga tu contenido favorito, desde cualquier dispositivo, en cualquier lugar</p>
+                    <img src="{% static 'img/emoji-1.png' %}" alt="Astradown Emoji 3d guiñando">
+                    <p>Astradown.</p>
+                </div>
+            </div>
+            <div class="wrapper-form">
+                <!-- {# <form action="unload/" method="get" class="form"> #} -->
+                <form method="post" class="form" id="form-home">
+                    {% csrf_token %}
+                    <div class="ctn-form">
+                        <label for="exampleInputEmail1" class="form-label">Ingresa el link para comenzar a
+                            descargar</label>
+                        <div class="input">
+                            <input name="url" type="text" class="form-control" id="link" aria-describedby="url"
+                                placeholder="Pega aquí tu link" style="color:var(--font-color);" required>
+                            <i class="fa-solid fa-trash-can" title="Eliminar contenido del campo"></i>
+                        </div>
+                        <div class="form-text">
+                            <span>Selecciona tu video favorito </span>
+                            <img src="{% static 'img/emoji-2.png' %}" alt="Astradown Emoji 3d aureola">
+                        </div>
+                    </div>
+                    <button class="button" type="submit" id="btn-hero" onclick="inicio();" aria-label="Descargar"
+                        title="Descargar">
+                        <div class=" icon">
+                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" height="16" width="16"
+                                role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"
+                                    stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
+                                    stroke="currentColor" fill="none">
+                                </path>
+                            </svg>
+                        </div>
+                        <p>Descargar</p>
+                    </button>
+                </form>
+            </div>
+            <div class="more-info">
+                <p>Descarga tus videos o shorts favoritos de YouTube en el formato que desees. <i
+                        class="fa-regular fa-circle-check"></i></p>
+            </div>
+        </div>
+        <div class="loader-hero">
+            <div class="wrapper-loader">
+                <div class="ctn-titles-loader">
+                    <div class="ctn-converting">
+                        <p>Estamos convirtiendo tu video...</p>
+                    </div>
+                    <div class="ctn-pacient">
+                        <p>Ten paciencia esto puede tardar entre 15 y 30 segundos 😊</p>
+                    </div>
+                </div>
+                <div class="container-loader">
+                    <div class="loader-item"></div>
+                    <div class="loader-item"></div>
+                    <div class="loader-item"></div>
+                </div>
+                <div class="ctn-reloj">
+                    <div id="contenedor">
+                        <div class="reloj" id="Horas">00</div>
+                        <div class="reloj" id="Minutos">:00</div>
+                        <div class="reloj" id="Segundos">:00</div>
+                        <div class="reloj" id="Centesimas">:00</div>
+                    </div>
+                    <div class="ctn-verses">
+                        <p id="verse"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper-tuto">
+            <div class="ctn-tuto">
+                <div class="ctn-content-tuto">
+                    <svg viewBox="0 0 280 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M99.65 195.5L122.15 218L182.15 158" stroke="var(--font-color)" stroke-width="10"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M110 65H170C200 65 200 50 200 35C200 5 185 5 170 5H110C95 5 80 5 80 35C80 65 95 65 110 65Z"
+                            stroke="var(--font-color)" stroke-width="10" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M200 35.3C249.95 38 275 56.45 275 125V215C275 275 260 305 185 305H95C20 305 5 275 5 215V125C5 56.6 30.05 38 80 35.3"
+                            stroke="var(--font-color)" stroke-width="10" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <h4>Copia el link de tu video</h4>
+                </div>
+                <div class="ctn-arrow">
+                    <svg viewBox="0 0 266 194" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M169.45 5.95001L260.5 97L169.45 188.05M5.5 97H257.95" stroke="var(--font-color)"
+                            stroke-width="10" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </div>
+                <div class="ctn-content-tuto">
+                    <svg viewBox="0 0 310 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12.8 81.65H297.2M102.8 6.65V79.55M207.2 6.65V72.8M305 200V110C305 35 275 5 200 5H110C35 5 5 35 5 110V200C5 275 35 305 110 305H200C275 305 305 275 305 200Z"
+                            stroke="var(--font-color)" stroke-width="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M121.25 191.75V173.75C121.25 150.65 137.6 141.2 157.55 152.75L173.15 161.75L188.75 170.75C208.7 182.3 208.7 201.2 188.75 212.75L173.15 221.75L157.55 230.75C137.6 242.3 121.25 232.85 121.25 209.75V191.75V191.75Z"
+                            stroke="var(--font-color)" stroke-width="10" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <h4>Selecciona la calidad y <br> el formato de tu preferencia</h4>
+                </div>
+                <div class="ctn-arrow">
+                    <svg viewBox="0 0 266 194" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M169.45 5.95001L260.5 97L169.45 188.05M5.5 97H257.95" stroke="var(--font-color)"
+                            stroke-width="10" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                </div>
+                <div class="ctn-content-tuto">
+                    <svg viewBox="0 0 310 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12.8 81.65H297.2M102.8 6.65V79.55M207.2 6.65V72.8M305 200V110C305 35 275 5 200 5H110C35 5 5 35 5 110V200C5 275 35 305 110 305H200C275 305 305 275 305 200Z"
+                            stroke="var(--font-color)" stroke-width="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M155 129C156.492 129 157.923 129.585 158.977 130.626C160.032 131.666 160.625 133.078 160.625 134.55V193.302L173.523 180.576C174.584 179.565 176.005 179.006 177.48 179.018C178.955 179.031 180.365 179.615 181.408 180.644C182.451 181.673 183.043 183.065 183.056 184.52C183.068 185.975 182.502 187.377 181.477 188.424L158.977 210.624C157.922 211.664 156.492 212.249 155 212.249C153.508 212.249 152.078 211.664 151.023 210.624L128.523 188.424C127.986 187.912 127.557 187.299 127.263 186.622C126.968 185.945 126.813 185.217 126.806 184.48C126.8 183.743 126.942 183.012 127.225 182.33C127.508 181.648 127.925 181.028 128.453 180.507C128.982 179.986 129.61 179.574 130.301 179.295C130.992 179.016 131.733 178.876 132.48 178.882C133.227 178.888 133.965 179.042 134.651 179.332C135.337 179.623 135.958 180.046 136.477 180.576L149.375 193.302V134.55C149.375 133.078 149.968 131.666 151.023 130.626C152.077 129.585 153.508 129 155 129ZM115.625 212.25C117.117 212.25 118.548 212.835 119.602 213.876C120.657 214.916 121.25 216.328 121.25 217.8V228.9H188.75V217.8C188.75 216.328 189.343 214.916 190.398 213.876C191.452 212.835 192.883 212.25 194.375 212.25C195.867 212.25 197.298 212.835 198.352 213.876C199.407 214.916 200 216.328 200 217.8V228.9C200 231.844 198.815 234.667 196.705 236.749C194.595 238.831 191.734 240 188.75 240H121.25C118.266 240 115.405 238.831 113.295 236.749C111.185 234.667 110 231.844 110 228.9V217.8C110 216.328 110.593 214.916 111.648 213.876C112.702 212.835 114.133 212.25 115.625 212.25Z"
+                            fill="var(--font-color)" />
+                    </svg>
+                    <h4>Descarga tu video de YouTube</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-pv">
+        <div class="ctn-pv">
+            <div class="ctn-content-pv">
+                <img src="{% static 'img/media.png' %}" alt="Astradown Computadora y refresco">
+            </div>
+            <div class="ctn-content-pv">
+                <p>Nunca te quedes sin contenido gracias a las descargas ilimitadas de Astradown.</p>
+            </div>
+        </div>
+    </section>
+    <section id="acerca-de">
+        <div class="section-info">
+            <div class="about-title">
+                <h1>Acerca de astradown</h1>
+                <h2>Descargar videos de YouTube es fácil y seguro</h2>
+            </div>
+            <div class="about-desc-hero">
+                <div class="section-desc-p">
+                    <p>
+                        "Astradown" es el lugar perfecto para descargar videos de YouTube de manera rápida y fácil.
+                        Nuestra
+                        plataforma te
+                        permite descargar tus videos favoritos de YouTube en alta calidad y guardarlos en tu dispositivo
+                        para
+                        verlos offline.
+                    </p>
+                    <img src="{% static 'img/offline.png' %}" alt="Astradown - Videos sin conexión">
+                </div>
+                <div class="section-desc-p">
+                    <p>
+                        ¿Quieres descargar videos de YouTube sin preocuparte por buffering o conexiones lentas?
+                        ¡Astradown es la solución!
+                        Nuestra plataforma te permite descargar videos de YouTube en formatos mp4 y mp3, lo que te
+                        permite reproducirlos en
+                        cualquier dispositivo o reproductor.
+                    </p>
+                    <img src="{% static 'img/player.png' %}" alt="Astradown - Videos en distintos formatos">
+                </div>
+                <div class="section-desc-p">
+                    <p>
+                        En Astradown valoramos la seguridad y privacidad de nuestros usuarios, por eso nuestra
+                        plataforma cuenta con medidas de
+                        seguridad avanzadas y no almacenamos ningún tipo de información personal. Con Astradown puedes
+                        descargar videos de
+                        YouTube de forma segura y privada.
+                    </p>
+                    <img src="{% static 'img/user-safe.png' %}" alt="Astradown - Descargas privadas">
+                </div>
+                <div class="section-desc-p">
+                    <p>
+                        Porque descargar videos de YouTube es gratis, descarga tu contenido favorito sin limitaciones.
+                    </p>
+                    <img src="{% static 'img/no-pay.png' %}" alt="Astradown - Descarga de videos de YouTube gratis">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-pv-cta">
+        <div class="ctn-pv-cta">
+            <div class="ctn-content-img-cta">
+                <img src="{% static 'img/rocket.png' %}" alt="Astradown - Cohete">
+            </div>
+            <div class="ctn-content-p-cta">
+                <p class="start-here">Empieza aquí</p>
+                <h1>Tus videos favoritos de YouTube siempre contigo.</h1>
+                <p>Si estas buscando una forma fácil y segura de descargar tus videos de YouTube, no busques más,
+                    Astradown es la mejor
+                    opción. No pierdas más tiempo buscando una forma de descargar videos de YouTube,
+                    !Comienza a descargar tus videos favoritos hoy mismo!</p>
+                <button type="button" class="star-download" aria-label="Emepezar a descargar"
+                    title="Emepezar a descargar">Empezar a descargar</button>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
