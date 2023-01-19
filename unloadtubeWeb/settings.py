@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'RENDER' not in os.environ
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     # 'astradown-josephasg-dev.apps.sandbox-m3.1530.p1.openshiftapps.com',
@@ -131,12 +131,12 @@ USE_TZ = True
 
 STATIC_URL = 'unloader/static/'
 
-if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
+# if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'unloader/static'),)
 STATICFILES_DIRS = [
